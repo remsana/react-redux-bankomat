@@ -12,9 +12,9 @@ function App() {
   return (
     <div className="App">
       <header className='header'>
-        <h1>React Redux Bankomat</h1>
+        <h1>React Redux Bank AB</h1>
       </header>
-      <button className="showBtn" onClick={() => dispatch(showHideAtm())}>{showAtm ? "Close ATM" : "Start ATM"}</button>
+      <button className={showAtm ? "showBtn" : "hideBtn"} onClick={() => dispatch(showHideAtm())}>{showAtm ? "Close ATM" : "Start ATM"}</button>
       {showAtm && <Atm />}
     </div>
   );

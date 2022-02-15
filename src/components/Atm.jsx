@@ -2,79 +2,85 @@ import { useSelector, useDispatch } from "react-redux";
 import { withdrawMoney, depositMoney } from "../redux/atmSlice";
 
 const Atm = () => {
-  const { balance } = useSelector((state) => state.atm);
-  const { status } = useSelector((state) => state.atm);
+  const { balance, status } = useSelector((state) => state.atm);
   const dispatch = useDispatch();
+//   console.log(balance);
+//   console.log(status);
 
-  const handleWithdrawal = () => {
-    const withdrawInput = +document.querySelector("#withdrawMoney").value;
-    console.log(withdrawInput);
-    dispatch(withdrawMoney(withdrawInput));
+  // Functions
+  const handleWithdrawal = (value) => {
+    let withdrawInput = +document.querySelector("#withdrawMoney").value;
+    dispatch(withdrawMoney(withdrawInput || value));
+    document.querySelector("#withdrawMoney").value = "";
   };
 
-  const handleWithdrawal2 = (value) => {
-    dispatch(withdrawMoney(value));
-  };
+//   const handleWithdrawal2 = (value) => {
+//     dispatch(withdrawMoney(value));
+//   };
 
-  const handleDeposit = () => {
+  const handleDeposit = (value) => {
     const depositInput = +document.querySelector("#depositMoney").value;
-    console.log(depositInput);
-    dispatch(depositMoney(depositInput));
+    dispatch(depositMoney(depositInput || value));
+    document.querySelector("#depositMoney").value = "";
   };
 
-  const handleDeposit2 = (value) => {
-    dispatch(depositMoney(value));
-  };
+//   const handleDeposit2 = (value) => {
+//     dispatch(depositMoney(value));
+//   };
 
   return (
     <div className="atm">
       <h2>Welcome to React Redux ATM</h2>
       <h4>Your current Balance is {balance} SEK </h4>
-
       <p>{status}</p>
-      {/* The withdrawal part */}
 
+      {/* The withdrawal part */}
       <div className="withdraw">
         <h3>Withdraw</h3>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleWithdrawal2(100);
+            handleWithdrawal(100);
           }}
         >
           100
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleWithdrawal2(200);
+            handleWithdrawal(200);
           }}
         >
           200
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleWithdrawal2(500);
+            handleWithdrawal(500);
           }}
         >
           500
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleWithdrawal2(1000);
+            handleWithdrawal(1000);
           }}
         >
           1000
         </button>
-        <br />
-        <br />
-        <label htmlFor="withdrawMoney">Enter Amount: </label>
-        <input type="number" id="withdrawMoney" />
-        <button
-          onClick={() => {
-            handleWithdrawal();
-          }}
-        >
-          Withdraw
-        </button>
+        <div className="labelDiv">
+          <label htmlFor="withdrawMoney">Enter Amount: </label>
+          <input type="number" id="withdrawMoney" />
+          <button
+            className="withDepBtn"
+            onClick={() => {
+              handleWithdrawal();
+            }}
+          >
+            Withdraw
+          </button>
+        </div>
       </div>
 
       {/* The deposit part */}
@@ -82,40 +88,50 @@ const Atm = () => {
       <div className="deposit">
         <h3>Deposit</h3>
 
-        <br />
         <button
+          className="amtBtn"
           onClick={() => {
-            handleDeposit2(100);
+            handleDeposit(100);
           }}
         >
           100
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleDeposit2(200);
+            handleDeposit(200);
           }}
         >
           200
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleDeposit2(500);
+            handleDeposit(500);
           }}
         >
           500
         </button>
         <button
+          className="amtBtn"
           onClick={() => {
-            handleDeposit2(1000);
+            handleDeposit(1000);
           }}
         >
           1000
         </button>
-        <br />
-        <br />
-        <label htmlFor="depositMoney">Enter Amount: </label>
-        <input type="number" id="depositMoney" />
-        <button onClick={() => {handleDeposit()}}>Deposit</button>
+        <div className="labelDiv">
+          <label htmlFor="depositMoney">Enter Amount: </label>
+          <input type="number" id="depositMoney" />
+          <button
+            className="withDepBtn"
+            onClick={() => {
+              handleDeposit();
+            }}
+          >
+            Deposit
+          </button>
+        </div>
       </div>
     </div>
   );
