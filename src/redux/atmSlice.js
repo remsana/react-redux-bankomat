@@ -12,22 +12,18 @@ const atmSlice = createSlice({
       state.showAtm = !state.showAtm;
     },
     withdrawMoney: (state, action) => {
-        // console.log(typeof(action.payload));
         //action.payload becomes undefined when the input is zero so used that in the condition below
         if (state.balance >= action.payload && action.payload > 0) {
             state.balance -= action.payload;
             state.status = `You have withdrawn ${action.payload} SEK`;
           } else if (action.payload < 0 || action.payload == undefined) {
-            state.balance = state.balance;
             state.status = "Invalid Amount. Please enter a valid amount!";          
           } else {
             state.status = `You do not have enough balance to withdraw ${action.payload} SEK. Please deposit!`;
           }
     },
     depositMoney: (state, action) => {
-
         if (action.payload < 0 || action.payload == undefined) {
-            state.balance = state.balance;
             state.status = "Invalid Amount. Please enter a valid amount!";
           } else if (action.payload > 0) {
             state.balance += action.payload;
